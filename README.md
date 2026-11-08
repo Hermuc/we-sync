@@ -36,6 +36,8 @@
 
 ## 界面怎么看
 
+![WE-Sync 设置窗口](docs/screenshot.png)
+
 窗口中间三行状态：
 
 | 行 | 含义 |
@@ -201,3 +203,9 @@ $env:WE_SYNC_LOG = "debug"
 | `plugins/agent/wsync-agent-*` | 否 | 只有用多通道时才需要 |
 
 **最小可用就是一个 exe**。
+
+---
+
+## 许可证
+
+[GNU General Public License v3.0](LICENSE) —— 可自由使用、修改、再分发；衍生作品必须以同样的协议开源。
