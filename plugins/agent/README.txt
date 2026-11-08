@@ -19,7 +19,7 @@ WE-Sync 手机端 agent（可选组件）
     bash scripts/build-agent-android.sh armv7      # 老机型
 
 原理：编成 aarch64-unknown-linux-musl 的**静态** ELF，用 rustc 自带的 rust-lld 链接，
-Android 内核可直接执行。实测 真我 Neo8（arm64-v8a / API 36）运行正常，体积约 440KB。
+Android 内核可直接执行。实测在 arm64-v8a / API 36 的真机上运行正常，体积约 440 KB。
 唯一的额外依赖是 target 的 std：rustup target add aarch64-unknown-linux-musl
 （国内直连 static.rust-lang.org 会超时，脚本已内置 rsproxy 镜像。）
 
