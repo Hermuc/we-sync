@@ -1,0 +1,13 @@
+[package]
+name = "wsync-agent"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.80"
+description = "WE-Sync 手机端接收器（无第三方依赖，可交叉编译到 Android）"
+
+[dependencies]
+wsync-proto = { path = "../wsync-proto" }
+
+[[bin]]
+name = "wsync-agent"
+path = "src/main.rs"

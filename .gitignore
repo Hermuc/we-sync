@@ -1,0 +1,15 @@
+# 构建产物
+/target
+/dist
+
+# 本机测试留下的数据
+/bench
+.bench/
+*.log
+
+# 运行时生成（exe 同目录）
+/sync-state.json
+/config.toml
+
+# 交叉编译出来的手机端二进制（由 scripts/build-agent-android.sh 生成）
+/plugins/agent/wsync-agent-*

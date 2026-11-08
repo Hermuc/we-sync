@@ -1,0 +1,49 @@
+[workspace]
+members = ["crates/wsync-proto", "crates/wsync-agent"]
+resolver = "2"
+
+[package]
+name = "we-sync"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.80"
+description = "Wallpaper Engine video wallpaper -> phone (MTP/adb) portable sync"
+
+[dependencies]
+anyhow = "1"
+wsync-proto = { path = "crates/wsync-proto" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "0.8"
+notify = "6"
+windows = { version = "0.58", features = [
+    "Win32_Foundation",
+    "Win32_System_Com",
+    "Win32_System_Com_StructuredStorage",
+    "Win32_System_Variant",
+    "Win32_System_Threading",
+    "Win32_Security",
+    "Win32_System_LibraryLoader",
+    "Win32_System_Console",
+    "Win32_System_Registry",
+    "Win32_System_Time",
+    "Win32_Devices_PortableDevices",
+    "Win32_Devices_Properties",
+    "Win32_UI_Shell",
+    "Win32_UI_Shell_PropertiesSystem",
+    "Win32_UI_WindowsAndMessaging",
+    "Win32_UI_Controls",
+    "Win32_UI_HiDpi",
+    "Win32_UI_Input_KeyboardAndMouse",
+    "Win32_Graphics_Gdi",
+    "Win32_Graphics_GdiPlus",
+    "Win32_Graphics_Dwm",
+    "Win32_Storage_FileSystem",
+] }
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true

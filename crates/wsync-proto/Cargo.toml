@@ -1,0 +1,8 @@
+[package]
+name = "wsync-proto"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.80"
+description = "WE-Sync 多通道传输协议（帧编解码 + 校验），PC 端与 Android agent 共用"
+
+[dependencies]
