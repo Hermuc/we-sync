@@ -6,6 +6,7 @@ pub mod engine;
 pub mod model;
 pub mod state;
 pub mod transport;
+#[cfg(feature = "ui")]
 pub mod ui;
 pub mod util;
 

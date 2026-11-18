@@ -9,16 +9,24 @@ use std::path::{Path, PathBuf};
 use std::sync::{Mutex, OnceLock};
 use std::time::{SystemTime, UNIX_EPOCH};
 
-/// 便携根目录 = exe 所在目录。绝不写注册表 / %APPDATA%。
+/// 应用目录：默认 exe 所在目录；集成方（如 WEaveR）可在首次使用前覆盖。
+static APP_DIR: OnceLock<PathBuf> = OnceLock::new();
+
+/// 覆盖应用目录（config/state/log 都落在这里）。返回 false 表示已被初始化过。
+pub fn set_app_dir(dir: PathBuf) -> bool {
+    APP_DIR.set(dir).is_ok()
+}
+
+/// 便携根目录 = exe 所在目录（未调用 set_app_dir 时）。绝不写注册表 / %APPDATA%。
 pub fn app_dir() -> PathBuf {
-    static DIR: OnceLock<PathBuf> = OnceLock::new();
-    DIR.get_or_init(|| {
-        std::env::current_exe()
-            .ok()
-            .and_then(|p| p.parent().map(Path::to_path_buf))
-            .unwrap_or_else(|| PathBuf::from("."))
-    })
-    .clone()
+    APP_DIR
+        .get_or_init(|| {
+            std::env::current_exe()
+                .ok()
+                .and_then(|p| p.parent().map(Path::to_path_buf))
+                .unwrap_or_else(|| PathBuf::from("."))
+        })
+        .clone()
 }
 
 pub fn config_path() -> PathBuf {

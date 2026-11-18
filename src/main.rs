@@ -1,13 +1,29 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
+#[cfg(feature = "ui")]
 use std::sync::mpsc;
 
+#[cfg(feature = "ui")]
 use we_sync::config::AppConfig;
+#[cfg(feature = "ui")]
 use we_sync::engine;
+#[cfg(feature = "ui")]
 use we_sync::ui;
+#[cfg(feature = "ui")]
 use we_sync::util;
 
 fn main() {
+    #[cfg(feature = "ui")]
+    run_gui();
+    #[cfg(not(feature = "ui"))]
+    {
+        eprintln!("we-sync: GUI 需要 ui feature（默认启用；库使用者可关闭）");
+        std::process::exit(1);
+    }
+}
+
+#[cfg(feature = "ui")]
+fn run_gui() {
     // ---- 单实例：已存在则唤起已有窗口
     if !acquire_single_instance() {
         util::log(util::Level::Info, "检测到已在运行，唤起已有实例后退出");

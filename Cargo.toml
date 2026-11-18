@@ -7,8 +7,17 @@ name = "we-sync"
 version = "0.1.0"
 edition = "2021"
 rust-version = "1.80"
-license = "GPL-3.0-only"
+license = "MIT OR GPL-3.0-only"
 description = "Wallpaper Engine video wallpaper -> phone (MTP/adb) portable sync"
+
+[features]
+default = ["ui"]
+ui = []
+
+[[bin]]
+name = "we-sync"
+path = "src/main.rs"
+required-features = ["ui"]
 
 [dependencies]
 anyhow = "1"

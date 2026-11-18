@@ -71,6 +71,13 @@ pub struct EngineHandle {
     pub abort: Arc<AtomicBool>,
 }
 
+impl EngineHandle {
+    /// 请求工作线程退出（保存状态后返回）。
+    pub fn quit(&self) {
+        let _ = self.tx.send(Cmd::Quit);
+    }
+}
+
 /// 启动工作线程。
 pub fn spawn(cfg: AppConfig, evt: Sender<Event>) -> EngineHandle {
     let (tx, rx) = std::sync::mpsc::channel::<Cmd>();
